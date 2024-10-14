@@ -1,0 +1,38 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title class="displayText">SuiDhaga</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="content">
+    <h1 class="displayText">Hello</h1>
+    <form (ngSubmit)="onSubmit()">
+      <ion-list>
+          <ion-item>
+            <ion-label position="floating">Email</ion-label>
+            <ion-input type="email" [(ngModel)]="email" name="email" required></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="floating">Password</ion-label>
+            <ion-input type="password" [(ngModel)]="password" name="password" required></ion-input>
+          </ion-item>
+
+          <ion-item *ngIf="!isSignIn">
+            <ion-label position="floating">Confirm Password</ion-label>
+            <ion-input type="password" [(ngModel)]="confPassword" name="confPassword" required></ion-input>
+          </ion-item>
+
+          <ion-item *ngIf="!isSignIn">
+            <ion-toggle>Are you a tailor ?</ion-toggle><br /><br />
+          </ion-item>
+        </ion-list>
+    </form>
+  </div>
+</ion-content>
+<ion-footer class="footer">
+  <p *ngIf="isSignIn">Dont have an account ? <strong (click)="toggleSignIn()">Create</strong></p>
+  <p *ngIf="!isSignIn">Already have an account ? <strong (click)="toggleSignIn()">Sign In</strong></p>
+  <ion-button class="primaryBtn" expand="full" (click)="onSubmit()">Submit</ion-button>
+</ion-footer>
