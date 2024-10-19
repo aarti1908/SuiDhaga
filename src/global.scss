@@ -40,18 +40,25 @@ body, ion-content {
   background-color: #f0f0f0; /* Replace with your desired color */
 }
 
-*{
+* {
   font-family: 'Open Sans';
 }
 
-.displayText{
+.displayText {
   font-family: 'Pacifico Regular';
 }
 
-.primaryBtn{
-  border : 2px solid var(--ion-text-color);
+.errorMessage{
+  color: red;
   font-weight: bold;
-  --background: transparent;
-  --border-radius: 12px;
-  --font-size: 18px;
+  text-align: left;
+  padding-left: 15px;
+  small{
+    display: block;
+  }
+}
+
+.custom-input {
+ font-weight : bold;
+ font-size: 18px;
 }

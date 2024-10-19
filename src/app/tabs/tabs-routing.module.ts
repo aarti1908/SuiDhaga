@@ -4,7 +4,7 @@ import { TabsPage } from './tabs.page';
 
 const routes: Routes = [
   {
-    path: 'sd',
+    path: '',
     component: TabsPage,
     children: [
       {

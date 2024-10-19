@@ -19,7 +19,7 @@ export class Tab1Page {
     })
   }
 
-  view(){
+  view(user : any){
     this.navCtrl.navigateForward('/posts');
   }
 }

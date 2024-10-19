@@ -6,33 +6,59 @@
 
 <ion-content [fullscreen]="true">
   <div class="content">
-    <h1 class="displayText">Hello</h1>
-    <form (ngSubmit)="onSubmit()">
-      <ion-list>
-          <ion-item>
-            <ion-label position="floating">Email</ion-label>
-            <ion-input type="email" [(ngModel)]="email" name="email" required></ion-input>
-          </ion-item>
+    <div class="formWrapper">
+      <form (ngSubmit)="onSubmit()" [formGroup]="userForm">
+        <ion-list>
+            <ion-item *ngIf="!isSignIn">
+              <ion-select label="You are ?" formControlName="roleId" class="custom-input">
+                <ion-select-option value="2">Customer</ion-select-option>
+                <ion-select-option value="3">Tailor</ion-select-option>
+              </ion-select>
+            </ion-item>
+            <div class="errorMessage" *ngIf="!isSignIn && userForm.get('roleId')?.invalid && userForm.get('roleId')?.touched">
+              <small *ngIf="userForm.get('roleId')?.errors?.['required']">This is required.</small>
+            </div>
 
-          <ion-item>
-            <ion-label position="floating">Password</ion-label>
-            <ion-input type="password" [(ngModel)]="password" name="password" required></ion-input>
-          </ion-item>
+            <ion-item *ngIf="!isSignIn">
+              <ion-label position="floating">Name</ion-label>
+              <ion-input class="custom-input" type="name" formControlName="name"></ion-input>
+            </ion-item>
+            <div class="errorMessage" *ngIf="userForm.get('name')?.invalid && userForm.get('name')?.touched">
+              <small *ngIf="userForm.get('name')?.errors?.['required']">This is required.</small>
+            </div>
 
-          <ion-item *ngIf="!isSignIn">
-            <ion-label position="floating">Confirm Password</ion-label>
-            <ion-input type="password" [(ngModel)]="confPassword" name="confPassword" required></ion-input>
-          </ion-item>
+            <ion-item>
+              <ion-label position="floating">Email</ion-label>
+              <ion-input class="custom-input" type="email" formControlName="email"></ion-input>
+            </ion-item>
+            <div class="errorMessage" *ngIf="userForm.get('email')?.invalid && userForm.get('email')?.touched">
+              <small *ngIf="userForm.get('email')?.errors?.['required']">This is required.</small>
+              <small *ngIf="userForm.get('email')?.errors?.['emailPattern']">Invalid email address.</small>
+            </div>
 
-          <ion-item *ngIf="!isSignIn">
-            <ion-toggle>Are you a tailor ?</ion-toggle><br /><br />
-          </ion-item>
-        </ion-list>
-    </form>
+            <ion-item>
+              <ion-label position="floating">Password</ion-label>
+              <ion-input class="custom-input" type="password" formControlName="password"></ion-input>
+            </ion-item>
+            <div class="errorMessage" *ngIf="userForm.get('password')?.invalid && userForm.get('password')?.touched">
+              <small *ngIf="userForm.get('password')?.errors?.['required']">This is required.</small>
+              <small *ngIf="userForm.get('password')?.errors?.['passwordStrength']">Password must be at least 8 characters long and include at least one uppercase letter and one number.</small>
+            </div>
+            <ion-item *ngIf="!isSignIn">
+              <ion-label position="floating">Confirm Password</ion-label>
+              <ion-input class="custom-input" type="password" formControlName="confPassword"></ion-input>
+            </ion-item>
+            <div class="errorMessage" *ngIf="!isSignIn && userForm.get('confPassword')?.invalid && userForm.get('confPassword')?.touched">
+              <small *ngIf="userForm.get('confPassword')?.errors?.['required']">This is required.</small>
+              <small *ngIf="userForm.get('confPassword')?.errors?.['passwordStrength']">Password must be at least 8 characters long and include at least one uppercase letter and one number.</small>
+            </div>
+          </ion-list>
+          <p *ngIf="isSignIn">Dont have an account ? <strong (click)="toggleSignIn()">Create</strong></p>
+          <p *ngIf="!isSignIn">Already have an account ? <strong (click)="toggleSignIn()">Sign In</strong></p>
+      </form>
+    </div>
   </div>
 </ion-content>
 <ion-footer class="footer">
-  <p *ngIf="isSignIn">Dont have an account ? <strong (click)="toggleSignIn()">Create</strong></p>
-  <p *ngIf="!isSignIn">Already have an account ? <strong (click)="toggleSignIn()">Sign In</strong></p>
   <ion-button class="primaryBtn" expand="full" (click)="onSubmit()">Submit</ion-button>
 </ion-footer>

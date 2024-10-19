@@ -10,7 +10,7 @@ export class ProfilePage implements OnInit {
 
   name: string = '';
   experience : number | null = null;
-  location : Object = [];
+  pincode : number | null = null;
   mobile : number | null = null;
 
   constructor(private userService: UsersService) { }
@@ -22,11 +22,11 @@ export class ProfilePage implements OnInit {
     const user = {
       name: this.name,
       experience :this.experience,
-      location : this.location,
+      location : this.pincode,
       mobile : this.mobile
     }
     this.userService.addUser(user).then(data => {
-      console.log(data)
+      console.log(data);
     });
   }
 }

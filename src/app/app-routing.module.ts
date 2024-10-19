@@ -6,8 +6,12 @@ import { NoAuthGuard } from './services/no-auth-guard.service';
 const routes: Routes = [
   {
     path: '',
+    loadChildren: () => import('./welcome/welcome.module').then( m => m.WelcomePageModule),
+    canActivate: [NoAuthGuard]
+  },
+  {
+    path: 'sd',
     loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule),
-    canActivate: [AuthGuard]
   },
   {
     path: 'login',
@@ -16,15 +20,12 @@ const routes: Routes = [
   },
   {
     path: 'profile',
-    loadChildren: () => import('./profile/profile.module').then( m => m.ProfilePageModule)
-  },
-  {
-    path: 'welcome',
-    loadChildren: () => import('./welcome/welcome.module').then( m => m.WelcomePageModule)
+    loadChildren: () => import('./profile/profile.module').then( m => m.ProfilePageModule),
+    canActivate: [AuthGuard]
   },
   {
     path: 'posts',
-    loadChildren: () => import('./posts/posts.module').then( m => m.PostsPageModule)
+    loadChildren: () => import('./posts/posts.module').then( m => m.PostsPageModule),
   }
 ];
 @NgModule({

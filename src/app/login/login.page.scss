@@ -1,9 +1,13 @@
 .content{
+  text-align: center;
   padding: 100px 24px 0;
+  .formWrapper{
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #eee;
+    border-radius: 16px;
+  }
 }
 .footer{
   text-align: center;
-  p{
-    margin-bottom: 50px;
-  }
 }
